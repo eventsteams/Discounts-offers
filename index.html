@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exclusive Privacy Discount — Joan Luiser × Keanu Reeves Meet</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080510;
+    --card-bg: linear-gradient(155deg, #13102a 0%, #0d0a1c 50%, #170f30 100%);
+    --surface: rgba(120, 80, 200, 0.06);
+    --txt: #ece6ff;
+    --txt2: #9b8cbf;
+    --accent: #a78bfa;
+    --accent-hi: #d4b8ff;
+    --gold: #f5c842;
+    --gold-lo: rgba(245, 200, 66, 0.2);
+    --green: #4ade80;
+    --green-lo: rgba(74, 222, 128, 0.2);
+    --red-strike: #fb7185;
+    --border: rgba(167, 139, 250, 0.12);
+    --glow: rgba(167, 139, 250, 0.25);
+  }
+  html:not(.dark) {
+    --bg: #f8f5ff;
+    --card-bg: linear-gradient(155deg, #fff 0%, #f3edff 50%, #ebe3ff 100%);
+    --surface: rgba(120, 80, 200, 0.05);
+    --txt: #1c1230;
+    --txt2: #6e5a90;
+    --accent: #7c3aed;
+    --accent-hi: #9333ea;
+    --gold: #b45309;
+    --gold-lo: rgba(180, 83, 9, 0.1);
+    --green: #16a34a;
+    --green-lo: rgba(22, 163, 74, 0.1);
+    --red-strike: #e11d48;
+    --border: rgba(124, 58, 237, 0.1);
+    --glow: rgba(124, 58, 237, 0.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;overflow-x:hidden;position:relative}
+  canvas.fx{position:fixed;inset:0;pointer-events:none}
+  #sparkleC{z-index:0}
+  #popC{z-index:80}
+
+  .orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.2;animation:oF 9s ease-in-out infinite}
+  .o1{width:320px;height:320px;background:#7c3aed;top:-70px;left:-50px}
+  .o2{width:260px;height:260px;background:#a78bfa;bottom:-40px;right:-30px;animation-delay:-4s}
+  .o3{width:180px;height:180px;background:#f5c842;top:45%;left:55%;animation-delay:-6s}
+  @keyframes oF{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-25px) scale(1.1)}}
+
+  .wrap{position:relative;z-index:2;max-width:480px;width:100%;animation:su .8s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(40px)}
+  @keyframes su{to{opacity:1;transform:translateY(0)}}
+
+  .card{background:var(--card-bg);border:1px solid var(--border);border-radius:26px;padding:34px 26px 28px;box-shadow:0 24px 60px rgba(0,0,0,.3),0 0 80px var(--glow);position:relative;overflow:hidden}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));background-size:200% 100%;animation:shimB 3s ease-in-out infinite}
+  @keyframes shimB{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold),#d97706);color:#1a1035;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;padding:5px 14px;border-radius:20px;animation:pB 2s ease-in-out infinite}
+  @keyframes pB{0%,100%{transform:scale(1);box-shadow:0 0 0 0 var(--gold-lo)}50%{transform:scale(1.04);box-shadow:0 0 18px 4px var(--gold-lo)}}
+
+  .member-tag{display:inline-flex;align-items:center;gap:5px;background:var(--green-lo);color:var(--green);font-size:10.5px;font-weight:600;padding:4px 12px;border-radius:14px;margin-left:8px;letter-spacing:.5px}
+
+  .icon-wrap{width:78px;height:78px;margin:18px auto 16px;background:linear-gradient(135deg,var(--accent),#6d28d9);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;box-shadow:0 8px 28px var(--glow);animation:ib 3s ease-in-out infinite;position:relative}
+  .icon-wrap::after{content:'';position:absolute;inset:-4px;border-radius:26px;border:2px solid var(--accent);opacity:0;animation:ir 3s ease-in-out infinite}
+  @keyframes ib{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-5px) rotate(-2deg)}75%{transform:translateY(3px) rotate(1deg)}}
+  @keyframes ir{0%,100%{opacity:0;transform:scale(1)}50%{opacity:.4;transform:scale(1.14)}}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;line-height:1.22;text-align:center;margin-bottom:6px}
+  h1 .hi{color:var(--accent-hi)}
+  .sub{text-align:center;color:var(--txt2);font-size:13.5px;line-height:1.55;margin-bottom:6px}
+  .event-info{text-align:center;font-size:12px;color:var(--txt2);margin-bottom:20px;padding:10px;background:var(--surface);border-radius:12px;border:1px solid var(--border)}
+  .event-info strong{color:var(--txt)}
+  .event-info .status{display:inline-flex;align-items:center;gap:4px;color:var(--green);font-weight:600;font-size:11px}
+  .event-info .status i{font-size:8px}
+
+  .greeting{text-align:center;font-size:14px;color:var(--accent-hi);margin-bottom:18px;font-weight:500}
+  .greeting strong{font-weight:700}
+
+  .timer{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:18px;font-size:13px;color:var(--gold);font-weight:600}
+  .timer .td{font-variant-numeric:tabular-nums;letter-spacing:1px}
+
+  .feats{list-style:none;margin-bottom:24px}
+  .feats li{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13.5px;line-height:1.4;opacity:0;animation:ff .5s ease forwards}
+  .feats li:last-child{border-bottom:none}
+  .feats li:nth-child(1){animation-delay:.3s}
+  .feats li:nth-child(2){animation-delay:.42s}
+  .feats li:nth-child(3){animation-delay:.54s}
+  .feats li:nth-child(4){animation-delay:.66s}
+  .feats li:nth-child(5){animation-delay:.78s}
+  @keyframes ff{to{opacity:1}}
+  .fi{width:30px;height:30px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;background:rgba(167,139,250,.12);color:var(--accent-hi)}
+  .ft strong{display:block;color:var(--txt);margin-bottom:1px}
+  .ft span{color:var(--txt2);font-size:11.5px}
+
+  .pricing{text-align:center;margin-bottom:22px;padding:18px;border-radius:16px;background:var(--surface);border:1px solid var(--border)}
+  .pricing .label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt2);margin-bottom:8px}
+  .pr{display:flex;align-items:center;justify-content:center;gap:12px}
+  .p-old{font-size:26px;font-weight:700;color:var(--red-strike);text-decoration:line-through;opacity:.6}
+  .p-arr{font-size:18px;color:var(--txt2)}
+  .p-new{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--accent-hi),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .p-new sup{font-size:22px;vertical-align:super}
+  .sav{display:inline-block;margin-top:7px;padding:3px 11px;background:var(--green-lo);color:var(--green);border-radius:8px;font-size:11.5px;font-weight:600}
+
+  .abtn{width:100%;padding:17px 22px;border:none;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#6d28d9,#5b21b6);color:#fff;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 28px var(--glow);letter-spacing:.3px}
+  .abtn:hover{transform:translateY(-2px);box-shadow:0 12px 36px var(--glow)}
+  .abtn:active{transform:translateY(1px)}
+  .abtn .shim{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:bsh 3s ease-in-out infinite}
+  @keyframes bsh{0%{left:-100%}50%,100%{left:150%}}
+  .abtn .bt{position:relative;z-index:1}
+  .abtn .bs{display:block;font-size:10.5px;font-weight:500;opacity:.8;margin-top:2px}
+  .decline{display:block;text-align:center;margin-top:12px;color:var(--txt2);font-size:11.5px;cursor:pointer;background:none;border:none;font-family:inherit;opacity:.65;transition:opacity .2s;width:100%}
+  .decline:hover{opacity:1;text-decoration:underline}
+
+  /* OVERLAYS */
+  .ov{display:none;position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px}
+  .ov.on{display:flex}
+  .sc{background:var(--card-bg);border:1px solid var(--border);border-radius:26px;padding:36px 24px 28px;max-width:440px;width:100%;text-align:center;position:relative;overflow:hidden;animation:sp .6s cubic-bezier(.34,1.56,.64,1) forwards;box-shadow:0 20px 70px rgba(0,0,0,.5),0 0 90px var(--green-lo)}
+  @keyframes sp{0%{transform:scale(.5) translateY(40px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+  .chk{width:84px;height:84px;margin:0 auto 16px;background:linear-gradient(135deg,var(--green),#22c55e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff;animation:cb .8s cubic-bezier(.34,1.56,.64,1) .3s forwards;transform:scale(0);box-shadow:0 8px 28px var(--green-lo)}
+  @keyframes cb{0%{transform:scale(0) rotate(-10deg)}60%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+  .st{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;margin-bottom:8px;background:linear-gradient(135deg,var(--green),var(--accent-hi));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .sm{color:var(--txt2);font-size:13px;line-height:1.6;margin-bottom:10px}
+  .payment-notice{background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(167,139,250,.08));border:1px solid rgba(245,200,66,.2);border-radius:14px;padding:14px;margin-bottom:16px;text-align:center}
+  .payment-notice .pn-title{font-weight:700;color:var(--gold);font-size:14px;margin-bottom:4px}
+  .payment-notice .pn-text{color:var(--txt2);font-size:12px;line-height:1.5}
+  .sd{background:var(--green-lo);border:1px solid rgba(74,222,128,.18);border-radius:14px;padding:14px;margin-bottom:18px;text-align:left}
+  .sd .dr{display:flex;justify-content:space-between;padding:5px 0;font-size:12.5px;color:var(--txt2)}
+  .sd .dr strong{color:var(--txt)}
+  .gbtn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--green),#22c55e);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 18px var(--green-lo);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+  .gbtn:hover{transform:translateY(-2px)}
+  .gbtn i{font-size:16px}
+
+  /* DECLINE */
+  .dc{background:var(--card-bg);border:1px solid var(--border);border-radius:22px;padding:28px 22px;max-width:370px;width:100%;text-align:center;animation:fs .4s ease forwards;box-shadow:0 16px 50px rgba(0,0,0,.4)}
+  @keyframes fs{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+  .dc .emo{font-size:44px;display:block;margin-bottom:10px}
+  .dc h3{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:6px}
+  .dc p{color:var(--txt2);font-size:12.5px;line-height:1.5;margin-bottom:18px}
+  .da{display:flex;gap:10px}
+  .da button{flex:1;padding:11px;border-radius:12px;font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s}
+  .bstay{border:none;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;box-shadow:0 4px 14px var(--glow)}
+  .bstay:hover{transform:translateY(-1px)}
+  .bleave{border:1px solid var(--border);background:transparent;color:var(--txt2)}
+  .bleave:hover{background:rgba(255,255,255,.04)}
+
+  /* ACCEPTED STATE */
+  .card.accepted{opacity:.5;pointer-events:none;filter:grayscale(.3);transition:all .6s ease}
+  .card.accepted .abtn{background:linear-gradient(135deg,var(--green),#22c55e) !important;cursor:default}
+
+  /* DECLINED STATE */
+  .card.declined{opacity:.35;pointer-events:none;filter:grayscale(.7);transition:all .6s ease}
+
+  @media(max-width:500px){
+    .card{padding:26px 18px 22px;border-radius:20px}
+    h1{font-size:21px}
+    .p-new{font-size:40px}
+    .p-old{font-size:22px}
+    .sc{padding:28px 18px 22px}
+  }
+</style>
+</head>
+<body>
+<div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<canvas class="fx" id="sparkleC"></canvas>
+<canvas class="fx" id="popC"></canvas>
+
+<div class="wrap">
+  <div class="card" id="offerCard">
+    <div style="text-align:center">
+      <span class="badge"><i class="fas fa-bolt"></i> Exclusive Member Discount</span>
+      <span class="member-tag"><i class="fas fa-crown"></i> VIP Member</span>
+    </div>
+
+    <div class="icon-wrap"><i class="fas fa-shield-halved"></i></div>
+
+    <div class="greeting">Welcome, <strong>Joan Luiser</strong> ✨</div>
+
+    <h1><span class="hi">Privacy Shield</span> +<br>Extended Meet &amp; Greet</h1>
+    <p class="sub">Exclusive privacy &amp; extended access protection for your completed event</p>
+
+    <div class="event-info">
+      <strong><i class="fas fa-star"></i> Meet &amp; Greet with Keanu Reeves</strong><br>
+      <span style="font-size:12px"><i class="fas fa-calendar"></i> April 5, 2026 &nbsp;·&nbsp; <span class="status"><i class="fas fa-circle"></i> Fully Booked &amp; Completed</span></span><br>
+      <span style="font-size:11px;color:var(--txt2)"><i class="fas fa-eye"></i> Public &amp; Monitored Event</span>
+    </div>
+
+    <div class="timer">
+      <i class="fas fa-clock"></i>
+      <span>Discount expires in </span>
+      <span class="td" id="timerDisplay">--:--</span>
+    </div>
+
+    <ul class="feats">
+      <li>
+        <div class="fi"><i class="fas fa-lock"></i></div>
+        <div class="ft"><strong>Full Event Privacy Protection</strong><span>Encrypt &amp; shield all meet footage &amp; personal data</span></div>
+      </li>
+      <li>
+        <div class="fi"><i class="fas fa-user-shield"></i></div>
+        <div class="ft"><strong>Identity &amp; Image Protection</strong><span>Control how your presence is shared publicly</span></div>
+      </li>
+      <li>
+        <div class="fi"><i class="fas fa-video"></i></div>
+        <div class="ft"><strong>Extended Meet Recording Access</strong><span>Private access to your exclusive meeting moments</span></div>
+      </li>
+      <li>
+        <div class="fi"><i class="fas fa-headset"></i></div>
+        <div class="ft"><strong>Dedicated VIP Support</strong><span>24/7 priority support for all privacy matters</span></div>
+      </li>
+      <li>
+        <div class="fi"><i class="fas fa-rotate-left"></i></div>
+        <div class="ft"><strong>30-Day Money-Back Guarantee</strong><span>Risk-free — full refund, no questions asked</span></div>
+      </li>
+    </ul>
+
+    <div class="pricing">
+      <div class="label">Your VIP Member Price</div>
+      <div class="pr">
+        <span class="p-old">$120</span>
+        <span class="p-arr"><i class="fas fa-arrow-right"></i></span>
+        <span class="p-new"><sup>$</sup>75</span>
+      </div>
+      <span class="sav"><i class="fas fa-tag"></i> &nbsp;You save $45 (37.5% off)</span>
+    </div>
+
+    <button class="abtn" id="acceptBtn" onclick="handleAccept()">
+      <span class="shim"></span>
+      <span class="bt">
+        <i class="fas fa-sparkles"></i> &nbsp;Accept &amp; Activate for $75
+        <span class="bs">Instant activation · Cancel anytime</span>
+      </span>
+    </button>
+    <button class="decline" onclick="showDecline()">No thanks, I'll pass on this discount</button>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="ov" id="successOv">
+  <div class="sc">
+    <div class="chk"><i class="fas fa-check"></i></div>
+    <h2 class="st">You're Almost There, Joan!</h2>
+    <p class="sm">Your Privacy Shield &amp; Extended Meet package has been reserved at your exclusive VIP discount price.</p>
+
+    <div class="payment-notice">
+      <div class="pn-title"><i class="fas fa-info-circle"></i> &nbsp;Payment Required to Confirm</div>
+      <div class="pn-text">To fully lock in your discounted rate and complete activation, please proceed to make your <strong style="color:var(--txt)">$75.00</strong> payment. Click the button below to send your payment confirmation request.</div>
+    </div>
+
+    <div class="sd">
+      <div class="dr"><span>Event</span><strong>Keanu Reeves Meet &amp; Greet</strong></div>
+      <div class="dr"><span>Date</span><strong>April 5, 2026</strong></div>
+      <div class="dr"><span>Member</span><strong>Joan Luiser (VIP)</strong></div>
+      <div class="dr"><span>Package</span><strong>Privacy + Extended Meet</strong></div>
+      <div class="dr"><span>Original Price</span><strong style="text-decoration:line-through;opacity:.5">$120.00</strong></div>
+      <div class="dr"><span>Your Price</span><strong style="color:var(--green)">$75.00</strong></div>
+      <div class="dr"><span>Status</span><strong style="color:var(--gold)">Awaiting Payment <i class="fas fa-hourglass-half"></i></strong></div>
+      <div class="dr"><span>Confirmation</span><strong id="confirmCode">—</strong></div>
+    </div>
+
+    <a class="gbtn" id="gmailLink" href="#" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-envelope"></i> Awesome, Let's Go! — Send Payment Request
+    </a>
+  </div>
+</div>
+
+<!-- DECLINE -->
+<div class="ov" id="declineOv">
+  <div class="dc">
+    <span class="emo">😢</span>
+    <h3>Are you sure, Joan?</h3>
+    <p>This exclusive 37.5% VIP discount on your Keanu Reeves Meet &amp; Greet privacy package won't last forever. You can always cancel within 30 days for a full refund.</p>
+    <div class="da">
+      <button class="bleave" onclick="confirmDecline()">Leave Offer</button>
+      <button class="bstay" onclick="closeDecline()"><i class="fas fa-arrow-left"></i> &nbsp;Stay</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── Dark Mode ─── */
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark')}
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){
+    e.matches?document.documentElement.classList.add('dark'):document.documentElement.classList.remove('dark');
+  });
+})();
+
+/* ─── IndexedDB Persistence ─── */
+var DB_NAME='jl_priv_offer';
+var STORE='state';
+var db=null;
+function openDB(cb){
+  var req=indexedDB.open(DB_NAME,1);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore(STORE)};
+  req.onsuccess=function(e){db=e.target.result;cb()};
+  req.onerror=function(){cb()};
+}
+function saveState(key,val){
+  if(!db)return;
+  try{var tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(val,key)}catch(e){}
+}
+function getState(key,cb){
+  if(!db){cb(null);return}
+  try{
+    var tx=db.transaction(STORE,'readonly');
+    var req=tx.objectStore(STORE).get(key);
+    req.onsuccess=function(){cb(req.result!==undefined?req.result:null)};
+    req.onerror=function(){cb(null)};
+  }catch(e){cb(null)}
+}
+
+/* ─── Timer ─── */
+var TIMER_DURATION=15*60;
+var timerEl=document.getElementById('timerDisplay');
+var timerInterval=null;
+function startTimer(remaining){
+  renderTimer(remaining);
+  timerInterval=setInterval(function(){
+    remaining--;
+    if(remaining<=0){remaining=0;clearInterval(timerInterval)}
+    saveState('timerEnd',Date.now()+remaining*1000);
+    renderTimer(remaining);
+  },1000);
+}
+function renderTimer(s){
+  if(s<=0){timerEl.textContent='00:00';return}
+  var m=Math.floor(s/60);var sec=s%60;
+  timerEl.textContent=(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
+}
+
+/* ─── Sparkle Canvas ─── */
+var sC=document.getElementById('sparkleC');var sX=sC.getContext('2d');var sparks=[];
+function rsC(){sC.width=innerWidth;sC.height=innerHeight}
+rsC();addEventListener('resize',rsC);
+for(var i=0;i<55;i++)sparks.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,sz:Math.random()*2.2+.5,ph:Math.random()*Math.PI*2,sp:Math.random()*.4+.2});
+function dSp(t){
+  sX.clearRect(0,0,sC.width,sC.height);
+  for(var j=0;j<sparks.length;j++){
+    var s=sparks[j];s.ph+=s.sp*.02;
+    var a=(Math.sin(s.ph)+1)*.5*.65;
+    sX.save();sX.globalAlpha=a;sX.fillStyle='#a78bfa';
+    sX.beginPath();sX.arc(s.x,s.y,s.sz,0,Math.PI*2);sX.fill();
+    sX.strokeStyle='#a78bfa';sX.lineWidth=.6;sX.beginPath();
+    sX.moveTo(s.x-s.sz*2,s.y);sX.lineTo(s.x+s.sz*2,s.y);
+    sX.moveTo(s.x,s.y-s.sz*2);sX.lineTo(s.x,s.y+s.sz*2);
+    sX.stroke();sX.restore();
+  }
+  requestAnimationFrame(dSp);
+}
+requestAnimationFrame(dSp);
+
+/* ─── Pop Blaster ─── */
+var pC=document.getElementById('popC');var pX=pC.getContext('2d');var parts=[];
+var popCols=['#a78bfa','#d4b8ff','#f5c842','#4ade80','#f472b6','#60a5fa','#fff','#fbbf24'];
+function rpC(){pC.width=innerWidth;pC.height=innerHeight}
+rpC();addEventListener('resize',rpC);
+
+function Part(x,y,tp){
+  this.x=x;this.y=y;this.tp=tp||'c';this.col=popCols[Math.floor(Math.random()*popCols.length)];
+  var a=Math.random()*Math.PI*2;var sp=Math.random()*13+4;
+  this.vx=Math.cos(a)*sp;this.vy=Math.sin(a)*sp-3;this.g=.14;
+  this.sz=Math.random()*8+3;this.life=1;this.dec=Math.random()*.014+.008;
+  this.rot=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.2;
+}
+function spPart(x,y){
+  var p=new Part(x,y,'sp');p.sz=Math.random()*3.5+1.5;
+  var a=Math.random()*Math.PI*2;var sp=Math.random()*5+2;
+  p.vx=Math.cos(a)*sp;p.vy=Math.sin(a)*sp;p.g=.05;p.dec=Math.random()*.018+.01;return p;
+}
+function firePop(x,y,n){
+  var tps=['c','r','s','sp'];
+  for(var i=0;i<n;i++)parts.push(new Part(x,y,tps[Math.floor(Math.random()*tps.length)]));
+  for(var k=0;k<12;k++)parts.push(spPart(x,y));
+}
+function drawStar(cx,cy,sp,or,ir){
+  var rot=Math.PI/2*3;var step=Math.PI/sp;
+  pX.beginPath();pX.moveTo(cx,cy-or);
+  for(var s=0;s<sp;s++){pX.lineTo(cx+Math.cos(rot)*or,cy+Math.sin(rot)*or);rot+=step;pX.lineTo(cx+Math.cos(rot)*ir,cy+Math.sin(rot)*ir);rot+=step;}
+  pX.closePath();pX.fill();
+}
+function aParts(){
+  pX.clearRect(0,0,pC.width,pC.height);
+  for(var i=parts.length-1;i>=0;i--){
+    var p=parts[i];p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.99;p.life-=p.dec;p.rot+=p.rs;
+    if(p.life<=0){parts.splice(i,1);continue}
+    pX.save();pX.globalAlpha=p.life;pX.translate(p.x,p.y);pX.rotate(p.rot);pX.fillStyle=p.col;
+    if(p.tp==='c'){pX.beginPath();pX.arc(0,0,p.sz,0,Math.PI*2);pX.fill()}
+    else if(p.tp==='r'){pX.fillRect(-p.sz/2,-p.sz/2,p.sz,p.sz*.6)}
+    else if(p.tp==='s'){drawStar(0,0,5,p.sz,p.sz*.4)}
+    else{pX.beginPath();pX.arc(0,0,p.sz*.5,0,Math.PI*2);pX.fill();pX.strokeStyle=p.col;pX.lineWidth=1;pX.beginPath();pX.moveTo(-p.sz*1.5,0);pX.lineTo(p.sz*1.5,0);pX.moveTo(0,-p.sz*1.5);pX.lineTo(0,p.sz*1.5);pX.stroke()}
+    pX.restore();
+  }
+  requestAnimationFrame(aParts);
+}
+requestAnimationFrame(aParts);
+
+/* Card hover pops */
+document.getElementById('offerCard').addEventListener('mouseenter',function(){
+  var r=this.getBoundingClientRect();
+  firePop(r.left+r.width*.2,r.top+r.height*.3,8);
+  firePop(r.right-r.width*.2,r.top+r.height*.3,8);
+});
+
+/* ─── Confirmation Code ─── */
+function genCode(){
+  var c='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';var r='PEM-';
+  for(var i=0;i<8;i++)r+=c[Math.floor(Math.random()*c.length)];return r;
+}
+
+/* ─── Gmail Link Builder ─── */
+function buildGmailLink(code){
+  var to='org.lionsgate@gmail.com';
+  var subj=encodeURIComponent('Payment Confirmation Request — Privacy Shield + Extended Meet ($75.00) — Joan Luiser');
+  var body=encodeURIComponent(
+    'Dear Team,\n\n'+
+    'I, Joan Luiser, am writing to confirm and complete my payment for the Privacy Shield + Extended Meet & Greet discount package.\n\n'+
+    'Details:\n'+
+    '• Event: Meet & Greet with Keanu Reeves\n'+
+    '• Date: April 5, 2026\n'+
+    '• Package: Privacy Shield + Extended Meet\n'+
+    '• Discounted Amount: $75.00 (originally $120.00)\n'+
+    '• Confirmation Code: '+code+'\n\n'+
+    'Please provide the payment instructions so I can complete the transaction and fully lock in my privacy protection and extended meet access.\n\n'+
+    'Thank you for the wonderful VIP discount!\n\n'+
+    'Warm regards,\nJoan Luiser'
+  );
+  return 'https://mail.google.com/mail/?view=cm&fs=1&to='+to+'&su='+subj+'&body='+body;
+}
+
+/* ─── Accept ─── */
+function handleAccept(){
+  var btn=document.getElementById('acceptBtn');
+  btn.style.pointerEvents='none';
+  btn.innerHTML='<span class="bt"><i class="fas fa-spinner fa-spin"></i> &nbsp;Processing…</span>';
+  var rect=btn.getBoundingClientRect();
+  firePop(rect.left+rect.width/2,rect.top,50);
+  firePop(rect.left,rect.top,30);
+  firePop(rect.right,rect.top,30);
+  setTimeout(function(){
+    firePop(innerWidth*.2,innerHeight*.3,40);
+    firePop(innerWidth*.8,innerHeight*.3,40);
+  },300);
+  setTimeout(function(){
+    firePop(innerWidth*.5,innerHeight*.2,55);
+    firePop(innerWidth*.3,innerHeight*.5,25);
+    firePop(innerWidth*.7,innerHeight*.5,25);
+  },600);
+  setTimeout(function(){
+    getState('confirmCode',function(existingCode){
+      var code=existingCode||genCode();
+      saveState('confirmCode',code);
+      saveState('accepted',true);
+      document.getElementById('confirmCode').textContent=code;
+      document.getElementById('gmailLink').href=buildGmailLink(code);
+      document.getElementById('successOv').classList.add('on');
+      markCardAccepted();
+      for(var b=0;b<10;b++){(function(idx){setTimeout(function(){firePop(Math.random()*innerWidth,Math.random()*innerHeight*.6,30)},idx*120)})(b)}
+      var bc=0;var ci=setInterval(function(){firePop(Math.random()*innerWidth,Math.random()*innerHeight*.5,18);bc++;if(bc>14)clearInterval(ci)},350);
+    });
+  },1500);
+}
+
+function markCardAccepted(){
+  var card=document.getElementById('offerCard');
+  card.classList.add('accepted');
+  var btn=document.getElementById('acceptBtn');
+  btn.style.pointerEvents='none';
+  btn.style.background='linear-gradient(135deg,#16a34a,#22c55e)';
+  btn.innerHTML='<span class="bt"><i class="fas fa-circle-check"></i> &nbsp;Accepted — Awaiting Payment<span class="bs">Privacy Shield reserved for Joan Luiser</span></span>';
+}
+
+function closeSuccess(){
+  document.getElementById('successOv').classList.remove('on');
+}
+
+/* ─── Decline ─── */
+function showDecline(){document.getElementById('declineOv').classList.add('on')}
+function closeDecline(){document.getElementById('declineOv').classList.remove('on')}
+function confirmDecline(){
+  document.getElementById('declineOv').classList.remove('on');
+  document.getElementById('offerCard').classList.add('declined');
+  saveState('declined',true);
+}
+
+/* ─── Init with Persistence ─── */
+openDB(function(){
+  /* Timer persistence */
+  getState('timerEnd',function(endTs){
+    if(endTs){
+      var rem=Math.max(0,Math.floor((endTs-Date.now())/1000));
+      startTimer(rem);
+    }else{
+      var end=Date.now()+TIMER_DURATION*1000;
+      saveState('timerEnd',end);
+      startTimer(TIMER_DURATION);
+    }
+  });
+  /* Accepted persistence */
+  getState('accepted',function(v){
+    if(v){
+      markCardAccepted();
+      getState('confirmCode',function(code){
+        if(code){
+          document.getElementById('confirmCode').textContent=code;
+          document.getElementById('gmailLink').href=buildGmailLink(code);
+        }
+      });
+    }
+  });
+  /* Declined persistence */
+  getState('declined',function(v){
+    if(v)document.getElementById('offerCard').classList.add('declined');
+  });
+});
+</script>
+</body>
+</html>
